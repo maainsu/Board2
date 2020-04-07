@@ -1,0 +1,11 @@
+{% for post in post_list %}
+<tr>
+    <td>{{ Post.title }}</td>
+<tr>
+<tr>
+    <td>{{ Post.content }}</td>
+<tr>
+{% endfor %}
+
+<h1>{{ post.title }} </h1>
+{{Post.content | linebreaks }}

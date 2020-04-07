@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>♬ 글 조회하기</title>
+<script type="text/javascript">
+	function modifyRequest(pass_field, num){
+		var inputStr = prompt("글 작성 시 사용했던 비밀번호를 입력하세요.");
+	    if (inputStr == pass_field) {
+	    	location.href="/myboard/modify/?num="+num
+	    } else if (inputStr == "") {
+	    	return
+	    } else{
+	    	alert("비밀번호가 일치하지 않아 수정 불가합니다.")
+	    }
+	}
+	
+	function deleteRequest(pass_field, num){
+		var inputStr = prompt("글 작성 시 사용했던 비밀번호를 입력하세요.");
+	    if (inputStr == pass_field) {
+	    	var answer=confirm("정말 삭제하시겠습니까?")
+	    	if(answer){
+		    	location.href="/myboard/delete/?num="+num	    	
+		    	alert("정상적으로 삭제되었습니다.")
+	    	} else return
+	    } else if (inputStr == "") {
+	    	return
+	    } else{
+	    	alert("비밀번호가 일치하지 않아 삭제 불가합니다.")
+	    }
+	}
+</script>
+</head>
+<body>
+	<h1>♬ 글 조회하기</h1>
+	<a href="/myboard/boardList/">▶ 목록보기</a>
+		<table>
+			<tr>
+				<td>글 번호: </td>
+				<td>{{data.num}}</td>
+			</tr>
+			<tr>
+				<td>조회수: </td>
+				<td>{{data.readcnt}}</td>
+			</tr>
+			<tr>
+				<td>작성자 IP: </td>
+				<td>{{data.bip}}</td>
+			</tr>
+			<tr>
+				<td>작성자 성명: </td>
+				<td><input type="text" name="name" value="{{data.name}}" readonly/></td>
+			</tr>
+			<tr>
+				<td>비밀번호: </td>
+				<td><input type="password" name="pass_field" value="{{data.pass_field}}" readonly/></td>
+			</tr>
+			<tr>
+				<td>글 제목: </td>
+				<td><input type="text" name="title" value="{{data.title}}" readonly/></td>
+			</tr>
+			<tr>
+				<td>글 내용: </td>
+				<td><textarea name="cont" readonly>{{data.cont}}</textarea></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="글 수정하기" onclick="modifyRequest('{{data.pass_field}}', '{{data.num}}')"></td>
+				<td><input type="button" value="글 삭제하기" onclick="deleteRequest('{{data.pass_field}}', '{{data.num}}')"></td>				
+			</tr>
+		</table>
+</body>
+</html>

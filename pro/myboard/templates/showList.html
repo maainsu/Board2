@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>boardList.html</title>
+</head>
+<body>
+	<h1>MyBoardList</h1>
+	<a href="/myboard/write/">▶ 새 글 작성하기</a>
+	<br>
+	<table border="1">
+		<tr style="background-color: yellow">
+			<th>No.</th><th>글 제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
+		</tr>
+		{% if boardList %}
+			{% for b in boardList%}
+			<tr>
+				<td>{{b.num}}</td>
+				<td>
+					<a href="/myboard/boardContent?num={{b.num}}">{{b.title}}</a>
+				</td>
+				<td>{{b.name}}</td>
+				<td>{{b.bdate}}</td>
+				<td>{{b.readcnt}}</td>
+			</tr>		
+			{% endfor %}
+			<tr>
+				<td colspan="5" style="text-align: center;">
+				{% if boardList.paginator.num_pages > 1 %}
+					<div>
+					{% if boardList.has_previous %}	
+						<a href="/myboard/boardList?page={{boardList.previous_page_number}}">◀</a>
+					{% endif %}
+					
+					&nbsp;&nbsp;{{boardList.number}}/{{boardList.paginator.num_pages}}&nbsp;&nbsp;
+					
+					{% if boardList.has_next %}	
+						<a href="/myboard/boardList?page={{boardList.next_page_number}}">▶</a>
+					{% endif %}
+					</div>
+				{% endif %}
+				</td>
+			</tr>
+		{% else %}
+			<tr><td>자료가 없습니다.</td></tr>
+		{% endif %}
+	</table>
+</body>
+</html>

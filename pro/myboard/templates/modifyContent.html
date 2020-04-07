@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>♬ 글 수정하기</title>
+<script type="text/javascript">
+	function checkData(){
+		if(frm.name.value==""){
+			alert("작성자 성명을 입력하세요.");
+			return false;
+		} else if(frm.title.value==""){
+			alert("글 제목을 입력하세요.");
+			return false;
+		} else if(frm.cont.value==""){
+			alert("글 내용을 입력하세요.");
+			return false;
+		}
+		return true;
+	}
+</script>
+</head>
+<body>
+	<h1>♬ 글 수정하기</h1>
+	<!--  onsubmit="return checkData()" -->
+	<form name="frm" action="/myboard/modifyOk/" method="post">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<td>글 번호: </td>
+				<td><input type="text" name="num" value="{{data.num}}" readonly/></td>
+			</tr>
+			<tr>
+				<td>작성자 성명: </td>
+				<td><input type="text" name="name" value="{{data.name}}"/></td>
+			</tr>
+			<tr>
+				<td>글 제목: </td>
+				<td><input type="text" name="title" value="{{data.title}}"/></td>
+			</tr>
+			<tr>
+				<td>글 내용: </td><td><textarea name="cont">{{data.cont}}</textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">
+					<input type="submit" value="수정하기"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

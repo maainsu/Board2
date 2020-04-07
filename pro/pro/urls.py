@@ -1,4 +1,4 @@
-"""pr URL Configuration
+"""pro URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from board.views import list
+from myboard import views
+from django.urls.conf import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('bookmark/', list ),
+    path('', views.Main),
+    path('myboard/', include('myboard.urls')),
 ]
